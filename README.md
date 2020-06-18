@@ -1,3 +1,9 @@
+# Would you rather?
+
+This is Second project in one the final projects from Udacity's React Nano Degree program. This app is built using react and redux. Material-ui components are also used in this app.
+
+This is a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. User select any of the option. Answering "neither" or "both" is against the rules.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
