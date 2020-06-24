@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { dispatch_initialDataAction } from "./store/actions/actionDispatchers";
+import Loader from "./components/Loader";
+import Routers from "./routers";
+import PropTypes from "prop-types";
+import "./styles/App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    this.props.initialData();
+  }
+
+  render() {
+    return this.props.loading ? (
+      <Loader />
+    ) : (
+      <div>
+        <Routers />
+      </div>
+    );
+  }
 }
 
-export default App;
+App.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  initialData: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  initialData: () => dispatch(dispatch_initialDataAction()),
+});
+
+const mapStateToProps = (state) => ({ loading: state.loading });
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
